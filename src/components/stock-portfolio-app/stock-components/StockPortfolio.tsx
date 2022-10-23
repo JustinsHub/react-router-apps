@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const StockPortfolio:React.FC = () => {
+
+    const [ownedStocks, setOwnedStocks] = useState([])
 
     //stock market
         // - GET method for stocks
@@ -24,8 +26,13 @@ const StockPortfolio:React.FC = () => {
         // - Add debouncing to search input and throttling on submitting
 
 
+
+    //render owned stocks by if you have more than 0 of purchased stock... put in an array?
+    //conditional on if you have a stock over 0 then render that stock... with + - input on purchasing
   return (
-    <div>StockPortfolio</div>
+    <section>
+        <h1>Your Portfolio</h1>
+    </section>
   )
 }
 
