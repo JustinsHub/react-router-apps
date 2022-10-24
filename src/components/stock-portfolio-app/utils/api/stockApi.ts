@@ -11,9 +11,12 @@ class StocksAPI {
         }
     }
 
-    static async purchaseStock(stocks: StockI) {
+    static async purchaseStock(stocks: number) {
         try {
-            const data = await axios.post(`${process.env.REACT_APP_STOCK_BASE_URL}/stocks`, stocks)
+            const data = await axios.post(`${process.env.REACT_APP_STOCK_BASE_URL}/stocks`, {
+                owned: stocks
+            })
+            
             return data
         } catch (error) {
             return error

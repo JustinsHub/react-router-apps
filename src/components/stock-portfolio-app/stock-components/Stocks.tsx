@@ -1,5 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import React, { ChangeEvent, FormEvent, useContext, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { StockContext } from '../../../contexts/StockContextWrapper'
+import StocksAPI from '../utils/api/stockApi'
 
 interface StockProps {
   stock: {
@@ -12,7 +14,9 @@ interface StockProps {
 }
 
 const Stocks:React.FC<StockProps> = ({stock}) => {
+  const {handlePurchaseStock, handleSellStock} = useContext(StockContext)
   const navigate = useNavigate()
+
   const [stockInput, setStockInput] = useState(0)
   const [buyStock, setBuyStock] = useState(false)
   const [sellStock, setSellStock] = useState(false)
@@ -24,27 +28,39 @@ const Stocks:React.FC<StockProps> = ({stock}) => {
 
   const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
     setStockInput(+e.target.value)
-}
+  }
 
+  
+  const handleStockPurchase = async(e: FormEvent<HTMLFormElement>) =>{
+    e.preventDefault()
+    try {
+        await StocksAPI.purchaseStock(stockInput)
+    } catch (error) {
+        return error
+    }
+  }
+  
   const handleRedirectStock = (stockName:string) => {
-    // navigate(`/stock-market/${stockName}`)
+    navigate(`/stock-market/${stockName}`)
   }
 
   const renderBuySellBtn = () => {
     if(buyStock){
       return (
       <div>
-        <span className="Stocks__input-desc">Shares to buy?</span>
-        <input
-        name="purchaseStocks"
-        type="number"
-        value={stockInput}
-        onChange={handleChange}
-        />
-        <div>
-          <button className="StockMarket__global-btn" onClick={handleOpenPurchase}>BUY</button>
-          <button className="StockMarket__global-btn" onClick={handlePurchaseCancel}>CANCEL</button>
-        </div>
+        <form onSubmit={handleStockPurchase}>
+          <span className="Stocks__input-desc">Shares to buy?</span>
+          <input
+          name="purchaseStocks"
+          type="number"
+          value={stockInput}
+          onChange={handleChange}
+          />
+          <div>
+            <button className="StockMarket__global-btn">BUY</button>
+            <button className="StockMarket__global-btn" onClick={handlePurchaseCancel}>CANCEL</button>
+          </div>
+        </form>
       </div>
       )
     } else if(sellStock) {
@@ -74,8 +90,8 @@ const Stocks:React.FC<StockProps> = ({stock}) => {
   }
 
   return (
-    <div className="Stocks__container" onClick={() => handleRedirectStock(stock.stockTicker)}>
-        <div className="Stocks__ticker">
+    <div className="Stocks__container">
+        <div className="Stocks__ticker" onClick={() => handleRedirectStock(stock.stockTicker)}>
             {stock.stockTicker}
         </div>
         <div className="Stocks__shares">

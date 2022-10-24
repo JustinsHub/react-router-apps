@@ -18,7 +18,6 @@
   margin: auto;
   margin-top: 1rem;
   padding: 1rem;
-  cursor: pointer;
 }
 
 .Stocks__input-desc {
@@ -33,6 +32,12 @@
 
 .Stocks__ticker {
   font-weight: 800;
+  cursor: pointer;
+}
+
+.Stocks__ticker:hover {
+  transform: scale(1.3);
+  transition: 0.2s ease;
 }
 
 .Stocks__price {

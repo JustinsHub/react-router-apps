@@ -35,8 +35,8 @@ const StockContextWrapper = ({children}: GlobalContextI) => {
 
     const handlePurchaseStock = async(stocks: StockI) => {
         try {
-            const stockPurchase = await StocksAPI.purchaseStock(stocks)
-            return stockPurchase
+            // const stockPurchase = await StocksAPI.purchaseStock(stocks)
+            // return stockPurchase
         } catch (error) {
             return error
         }

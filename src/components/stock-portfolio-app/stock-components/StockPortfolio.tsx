@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router'
 import { StockContext } from '../../../contexts/StockContextWrapper'
 import { StockI } from '../../../interfaces/stock.interface'
 import Stocks from './Stocks'
@@ -32,10 +33,10 @@ const StockPortfolio:React.FC = () => {
             //if sold then I get money back + to buyingPower
 
     const { getStocks, buyingPower, handlePurchaseStock, handleSellStock } = useContext(StockContext)
+    const navigate = useNavigate()
+
     const [stocksOwned, setStocksOwned] = useState([])
     const [stockInput, setStockInput] = useState(0)
-
-    const currentStockInput = stocksOwned.map((stock:StockI) => stock.owned)
     
     useEffect(() => {
         setStocksOwned(getStocks)
@@ -57,6 +58,10 @@ const StockPortfolio:React.FC = () => {
             Buying Power: ${buyingPower}
         </div>
 
+        <h4 style={{textDecoration: 'underline'}}>
+            Stocks Owned
+        </h4>
+
         <div>
         {stocksOwned
         .filter((stock:StockI) => stock.owned)
@@ -68,6 +73,9 @@ const StockPortfolio:React.FC = () => {
             )
         })
         }
+        </div>
+        <div style={{marginTop:"1rem"}}>
+            <button className="StockMarket__global-btn" onClick={() => navigate(-1)}>Back</button>
         </div>
     </section>
   )
