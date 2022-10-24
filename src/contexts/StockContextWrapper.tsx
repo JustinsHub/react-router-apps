@@ -5,12 +5,20 @@ import { StockI, StockContextI } from "../interfaces/stock.interface"
 
 
 const StockDefaultValues: StockContextI = {
-    getStocks: []
+    getStocks: [],
+    buyingPower: 5000,
+    handlePurchaseStock: Function, 
+    handleSellStock: Function
 }
 
 const StockContext = createContext(StockDefaultValues)
 
 const StockContextWrapper = ({children}: GlobalContextI) => {
+
+    //create count from here and pass it down and test if its global count and stays without refreshing
+    //have cash remaining as well default to something like 3000?
+    const [buyingPower, setBuyingPower] = useState(5000)
+
     const [getStocks, setGetStocks] = useState([])
 
     useEffect(() => {
@@ -25,8 +33,21 @@ const StockContextWrapper = ({children}: GlobalContextI) => {
         getStocksData()
     }, [])
 
+    const handlePurchaseStock = async(stocks: StockI) => {
+        try {
+            const stockPurchase = await StocksAPI.purchaseStock(stocks)
+            return stockPurchase
+        } catch (error) {
+            return error
+        }
+    }
+    
+    const handleSellStock = async() => {
+        
+    }
+
   return (
-      <StockContext.Provider value={{ getStocks }}>
+      <StockContext.Provider value={{ getStocks, buyingPower, handlePurchaseStock, handleSellStock }}>
           {children}
       </StockContext.Provider>
   )

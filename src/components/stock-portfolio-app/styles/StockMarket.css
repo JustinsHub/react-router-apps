@@ -1,5 +1,14 @@
-.StockMarket__container {
+.StockMarket__global-container {
   text-align: center;
+}
+
+.StockMarket__global-btn {
+  background: none;
+  border: 0.15rem solid rgb(61, 167, 61);
+  border-radius: 0.5rem;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  margin: 0 0.5rem 0 0;
+  cursor: pointer;
 }
 
 .Stocks__container {
@@ -12,10 +21,30 @@
   cursor: pointer;
 }
 
+.Stocks__input-desc {
+  font-size: 0.8rem;
+  color: red;
+}
+
+.Stocks__shares {
+  font-size: 0.8rem;
+  color: grey;
+}
+
 .Stocks__ticker {
   font-weight: 800;
 }
 
 .Stocks__price {
   font-size: 0.8rem;
+}
+
+.Stock__container {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+}
+
+.Stock__price {
+  font-weight: 700;
 }
