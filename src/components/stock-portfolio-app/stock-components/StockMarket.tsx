@@ -1,16 +1,18 @@
 import React, { useContext } from 'react'
 import { StockContext } from '../../../contexts/StockContextWrapper'
-import { Stock } from '../../../interfaces/stock.interface'
+import { StockI } from '../../../interfaces/stock.interface'
 import Stocks from './Stocks'
+import '../styles/StockMarket.css'
 
 
 const StockMarket:React.FC = () => {
     const { getStocks } = useContext(StockContext)
     
   return (
-    <section>
+    <section className="StockMarket__container">
+        <h1>Stock Market</h1>
         <div>
-            {getStocks.map((stock:Stock) => {
+            {getStocks.map((stock:StockI) => {
                 return (
                     <Stocks key={stock.id} stock={stock}/>
                 )

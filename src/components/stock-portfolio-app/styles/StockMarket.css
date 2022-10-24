@@ -1,0 +1,21 @@
+.StockMarket__container {
+  text-align: center;
+}
+
+.Stocks__container {
+  border: 0.15rem solid rgb(61, 167, 61);
+  border-radius: 0.5rem;
+  width: 25%;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.Stocks__ticker {
+  font-weight: 800;
+}
+
+.Stocks__price {
+  font-size: 0.8rem;
+}

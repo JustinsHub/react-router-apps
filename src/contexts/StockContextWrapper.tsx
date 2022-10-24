@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react"
 import StocksAPI from "../components/stock-portfolio-app/utils/api/stockApi"
 import { GlobalContextI } from "../interfaces/global.interface"
-import { Stock, StockContextI } from "../interfaces/stock.interface"
+import { StockI, StockContextI } from "../interfaces/stock.interface"
 
 
 const StockDefaultValues: StockContextI = {
@@ -16,7 +16,7 @@ const StockContextWrapper = ({children}: GlobalContextI) => {
     useEffect(() => {
         const getStocksData = async() => {
             try {
-                const { data }: Stock[] | any = await StocksAPI.getAllStock()
+                const { data }: StockI[] | any = await StocksAPI.getAllStock()
                 setGetStocks(data)
             } catch (error) {
                 return error

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router'
 import CounterApp from '../components/counter-app/CounterApp'
+import Stock from '../components/stock-portfolio-app/stock-components/Stock'
 import StockMarket from '../components/stock-portfolio-app/stock-components/StockMarket'
 import StockPortfolio from '../components/stock-portfolio-app/stock-components/StockPortfolio'
 import { StockContextWrapper } from '../contexts/StockContextWrapper'
@@ -15,18 +16,27 @@ const MainRoutes:React.FC = () => {
         <Route 
         path='/stock-market' 
         element={
-          <StockContextWrapper>
-            <StockMarket/>
-          </StockContextWrapper>
+            <StockContextWrapper>
+              <StockMarket/>
+            </StockContextWrapper>
+        }/>
+
+        <Route 
+        path='/stock-market/:stockTicker' 
+        element={
+            <StockContextWrapper>
+              <Stock/>
+            </StockContextWrapper>
         }/>
 
         <Route 
         path='/stock-portfolio' 
         element={
-          <StockContextWrapper>
-            <StockPortfolio/>
-          </StockContextWrapper>
+            <StockContextWrapper>
+              <StockPortfolio/>
+            </StockContextWrapper>
         }/>
+
     </Routes>
   )
 }
